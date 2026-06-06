@@ -535,15 +535,19 @@ textarea.form-input { resize: vertical; min-height: 120px; }
 .auth-footer-link a:hover { text-decoration: underline; }
 
 /* ══════════════════════════════════════════
-   PRINT STYLES — MONOCHROME LASER PRINTER OPTIMIZATION
+   PRINT STYLES — PURE BLACK MONOCHROME OPTIMIZATION
    
-   These styles ensure maximum compatibility with monochrome laser printers
-   (HP LaserJet, Brother, Canon, etc.) by using only grayscale values and
-   achieving visual hierarchy through tonal variation rather than color.
+   All text, borders, and lines use pure black (#000000) for maximum
+   compatibility with all monochrome laser printers. This eliminates
+   dithering/halftoning inconsistencies and ensures crisp, reliable
+   output on HP LaserJet, Brother, Canon, Xerox, and other models.
    
-   All colors use pure blacks (#000), grays (#333, #555, #666, #888, #999, #ccc, #ddd, #f2f2f2, #f9f9f9),
-   and white backgrounds. Dithering/halftoning patterns render cleanly as professional
-   tones on monochrome devices.
+   Color palette:
+   - Pure Black (#000000) for all text, borders, lines, and text elements
+   - White (#ffffff) for backgrounds only
+   
+   This approach prioritizes reliability and consistent printing across
+   all monochrome printer models and toner levels.
 ══════════════════════════════════════════ */
 .print-report { display: none; }
 
@@ -562,16 +566,16 @@ textarea.form-input { resize: vertical; min-height: 120px; }
   .print-report {
     display: block !important;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    /* MONOCHROME: Pure black text for crisp laser printer output */
+    /* PURE BLACK: All text uses #000000 for reliable printer output */
     color: #000000;
   }
 
-  /* Header — Bold black design for strong visual anchor */
+  /* Header — Pure black design for maximum clarity */
   .pr-header {
     text-align: center;
     margin-bottom: 18px;
     padding-bottom: 12px;
-    /* MONOCHROME: Pure black border for high contrast and crisp printing */
+    /* PURE BLACK: Border is pure black for crisp, reliable printing */
     border-bottom: 2px solid #000000;
   }
   .pr-header h1 {
@@ -580,13 +584,13 @@ textarea.form-input { resize: vertical; min-height: 120px; }
     text-transform: uppercase;
     letter-spacing: 3px;
     margin-bottom: 4px;
-    /* MONOCHROME: Pure black ensures text renders sharply on all monochrome devices */
+    /* PURE BLACK: All headers rendered in pure black (#000000) */
     color: #000000;
   }
-  /* MONOCHROME: Date text uses medium-dark gray (#555) for reduced emphasis */
-  .pr-header .pr-date { font-size: 11px; color: #555555; }
+  /* PURE BLACK: Date text also pure black for consistency */
+  .pr-header .pr-date { font-size: 11px; color: #000000; }
 
-  /* KPI grid — High contrast boxes with clear hierarchy */
+  /* KPI grid — High contrast with pure black text */
   .pr-kpi-grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
@@ -594,43 +598,43 @@ textarea.form-input { resize: vertical; min-height: 120px; }
     margin-bottom: 18px;
   }
   .pr-kpi {
-    /* MONOCHROME: Light gray borders (#ddd) provide structure without heavy inking */
-    border: 1px solid #dddddd;
+    /* PURE BLACK: Borders are pure black for definition */
+    border: 1px solid #000000;
     border-radius: 5px;
     padding: 8px 10px;
     text-align: center;
-    /* MONOCHROME: White background ensures maximum contrast for text */
+    /* White background provides contrast with pure black text */
     background: #ffffff;
   }
   .pr-kpi-label {
     font-size: 8px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    /* MONOCHROME: Medium gray (#666) for secondary text hierarchy */
-    color: #666666;
+    /* PURE BLACK: All labels rendered in pure black */
+    color: #000000;
     margin-bottom: 4px;
   }
-  /* MONOCHROME: Pure black values for maximum legibility on monochrome printers */
+  /* PURE BLACK: All values are pure black for maximum legibility */
   .pr-kpi-value { 
     font-size: 13px; 
     font-weight: 700;
     color: #000000;
   }
-  /* MONOCHROME: Change indicator uses distinct grayscale tones (controlled by inline styles in JS) */
+  /* PURE BLACK: All indicators use pure black (#000000) */
   .pr-kpi-change { 
     font-size: 10px; 
     margin-top: 3px;
-    /* Dark gray (#333) for positive, black (#000) for negative — applied via inline style in printReport() */
+    color: #000000;
   }
 
-  /* Charts — Optimized for monochrome halftone rendering */
+  /* Charts — Pure black for all elements */
   .pr-chart-box {
-    /* MONOCHROME: Light gray border for clean separation without excessive ink */
-    border: 1px solid #dddddd;
+    /* PURE BLACK: Chart borders are pure black */
+    border: 1px solid #000000;
     border-radius: 5px;
     padding: 10px;
     margin-bottom: 14px;
-    /* MONOCHROME: White background ensures chart images render with proper contrast */
+    /* White background for contrast */
     background: #ffffff;
   }
   .pr-chart-box h4 {
@@ -638,25 +642,24 @@ textarea.form-input { resize: vertical; min-height: 120px; }
     text-transform: uppercase;
     letter-spacing: 0.5px;
     margin-bottom: 8px;
-    /* MONOCHROME: Dark gray (#444) for heading hierarchy */
-    color: #444444;
+    /* PURE BLACK: Chart headings are pure black */
+    color: #000000;
   }
-  /* MONOCHROME: Chart images print at full width with native resolution for crisp halftones */
+  /* PURE BLACK: Chart images render with pure black axes and text */
   .pr-chart-full img { 
     width: 100%; 
     height: auto; 
     display: block;
-    /* Ensures no color management artifacts on monochrome printers */
   }
 
-  /* History table — Clear, scannable data layout */
+  /* History table — Pure black text and borders */
   .pr-history h4 {
     font-size: 9px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
     margin-bottom: 8px;
-    /* MONOCHROME: Dark gray for section heading */
-    color: #444444;
+    /* PURE BLACK: History section heading */
+    color: #000000;
   }
   .pr-history-table { 
     width: 100%; 
@@ -664,27 +667,26 @@ textarea.form-input { resize: vertical; min-height: 120px; }
     font-size: 10px;
   }
   .pr-history-table th {
-    /* MONOCHROME: Light gray background (#f2f2f2) provides visual distinction for headers */
-    background: #f2f2f2;
+    /* Light background for visual distinction */
+    background: #ffffff;
     padding: 5px 7px;
     text-align: left;
     font-size: 9px;
     text-transform: uppercase;
     letter-spacing: 0.3px;
-    /* MONOCHROME: Black text on gray background maintains high contrast */
+    /* PURE BLACK: Table header text is pure black */
     color: #000000;
-    /* MONOCHROME: Light gray borders keep table scannable without heavy inking */
-    border: 1px solid #dddddd;
+    /* PURE BLACK: Table borders are pure black for definition */
+    border: 1px solid #000000;
   }
   .pr-history-table td { 
     padding: 5px 7px; 
-    /* MONOCHROME: Consistent light gray borders for professional table appearance */
-    border: 1px solid #dddddd;
-    /* MONOCHROME: Black text for all data values */
+    /* PURE BLACK: All table borders are pure black */
+    border: 1px solid #000000;
+    /* PURE BLACK: All table data text is pure black */
     color: #000000;
   }
-  /* MONOCHROME: Alternating very light gray rows (#f9f9f9) aid readability without harsh banding */
-  .pr-history-table tr:nth-child(even) td { background: #f9f9f9; }
-  /* MONOCHROME: Odd rows use pure white for maximum contrast variation */
+  /* White rows for contrast */
+  .pr-history-table tr:nth-child(even) td { background: #ffffff; }
   .pr-history-table tr:nth-child(odd) td { background: #ffffff; }
 }

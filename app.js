@@ -593,11 +593,11 @@ function downloadTemplate() {
  * (HP LaserJet, Brother, Canon, etc.).
  * 
  * MONOCHROME ADAPTATIONS:
- * - All color specifications use grayscale values only (#000, #333, #555, #777, #999, #ccc, #ddd, #f5f5f5, white)
- * - No RGB, HEX color codes for red/green or color-dependent styling
- * - Positive/negative indicators (MoM changes) use distinct grayscale tones (#333 for positive, #000 for negative)
- * - High contrast black/white design ensures sharp text and legible charts on monochrome devices
- * - Dithering patterns in images render as professional halftones on laser printers
+ * - All text, borders, and lines use pure black (#000000) for maximum printer compatibility
+ * - No grayscale variations or light colors that may not print reliably
+ * - Bold contrast between pure black and white backgrounds ensures crisp, scannable output
+ * - Pure black rendering eliminates dithering inconsistencies across different printer models
+ * - High ink density on printed text and lines prevents fading on all monochrome devices
  */
 function printReport() {
   const latest = snapshots.length > 0 ? snapshots[snapshots.length - 1] : null;
@@ -617,17 +617,16 @@ function printReport() {
       const ch    = k.value - k.prev;
       const pct   = k.prev !== 0 ? (ch / k.prev) * 100 : 0;
       const sign  = ch >= 0 ? '+' : '';
-      // MONOCHROME: Use grayscale colors instead of 'green'/'red' for laser printer compatibility
-      // #333 (dark gray) for positive change; #000 (black) for negative change for strong contrast
-      const color = ch >= 0 ? '#333333' : '#000000';
+      // MONOCHROME: All indicators use pure black (#000000) for reliable printer output
+      const color = '#000000';
       changeHtml = `<div class="pr-kpi-change" style="color:${color}">${sign}${pct.toFixed(1)}% MoM</div>`;
     }
     return `<div class="pr-kpi"><div class="pr-kpi-label">${k.label}</div>
       <div class="pr-kpi-value">${fmt(k.value)}</div>${changeHtml}</div>`;
   }).join('');
 
-  // Render print-specific line chart off-screen: only Net Worth total, black text
-  // MONOCHROME: Chart uses pure black (#000) and light gray (0.06 opacity) for crisp print output
+  // Render print-specific line chart off-screen: only Net Worth total, pure black
+  // MONOCHROME: Chart uses pure black (#000000) for all lines and text
   const offscreen = document.createElement('div');
   offscreen.style.cssText = 'position:fixed;left:-9999px;top:0;visibility:hidden';
   document.body.appendChild(offscreen);
@@ -645,8 +644,8 @@ function printReport() {
         datasets: [{
           label: 'Net Worth',
           data: snapshots.map(s => s.total),
-          // MONOCHROME: Pure black line (#000) with light gray fill (6% opacity) for monochrome legibility
-          borderColor: '#000000', backgroundColor: 'rgba(0,0,0,0.06)',
+          // MONOCHROME: Pure black line (#000000) for maximum printer compatibility
+          borderColor: '#000000', backgroundColor: 'rgba(0,0,0,0.1)',
           fill: true, tension: 0.3, pointRadius: 3, borderWidth: 2
         }]
       },
@@ -654,9 +653,9 @@ function printReport() {
         responsive: false, animation: { duration: 0 },
         plugins: { legend: { display: false } },
         scales: {
-          // MONOCHROME: All axis text and grids use black/gray for laser printer clarity
-          x: { grid: { color: '#dddddd' }, ticks: { color: '#000000', font: { size: 10 }, maxRotation: 45 } },
-          y: { grid: { color: '#dddddd' }, ticks: { color: '#000000', font: { size: 10 }, callback: v => fmtShort(v) } }
+          // MONOCHROME: All axis lines, grids, and text use pure black (#000000)
+          x: { grid: { color: '#000000' }, ticks: { color: '#000000', font: { size: 10 }, maxRotation: 45 } },
+          y: { grid: { color: '#000000' }, ticks: { color: '#000000', font: { size: 10 }, callback: v => fmtShort(v) } }
         }
       }
     });
@@ -666,12 +665,12 @@ function printReport() {
 
   document.body.removeChild(offscreen);
 
-  // MONOCHROME: No-data message uses medium gray (#999) for reduced prominence
-  const lineHtml = lineImg ? `<img src="${lineImg}" alt="Net Worth Chart">` : '<div style="padding:40px;text-align:center;color:#999999;font-size:11px">No data</div>';
+  // MONOCHROME: No-data message uses pure black for consistent appearance
+  const lineHtml = lineImg ? `<img src="${lineImg}" alt="Net Worth Chart">` : '<div style="padding:40px;text-align:center;color:#000000;font-size:11px">No data</div>';
 
   const recent = [...snapshots].reverse().slice(0, 12);
   const rowsHtml = recent.length === 0
-    ? '<tr><td colspan="7" style="text-align:center;color:#999999">No data</td></tr>'
+    ? '<tr><td colspan="7" style="text-align:center;color:#000000">No data</td></tr>'
     : recent.map(snap => {
         const idx  = snapshots.findIndex(s => s.id === snap.id);
         const p    = snapshots[idx - 1];
@@ -680,8 +679,8 @@ function printReport() {
           const ch    = snap.total - p.total;
           const pct   = p.total !== 0 ? (ch / p.total) * 100 : 0;
           const sign  = ch >= 0 ? '+' : '';
-          // MONOCHROME: Use distinct grayscale tones: dark gray (#333) for gains, black (#000) for losses
-          const color = ch >= 0 ? '#333333' : '#000000';
+          // MONOCHROME: All text uses pure black (#000000) for consistent, reliable printing
+          const color = '#000000';
           momCell = `<span style="color:${color}">${sign}${pct.toFixed(2)}%</span>`;
         }
         return `<tr>
