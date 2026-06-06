@@ -133,7 +133,7 @@
       <div id="patchNotes" class="section-content" style="display:none">
         <div class="patch-notes-content">
           <div class="patch-version">
-            <h4>v2.5.0 &mdash; Monochrome Laser Printer Optimization</h4>
+            <h4>v2.5 &mdash; Monochrome Laser Printer Optimization</h4>
             <ul>
               <li>Print function now uses grayscale values exclusively (pure blacks, grays, whites) for full compatibility with monochrome laser printers (HP LaserJet, Brother, Canon, etc.)</li>
               <li>Removed all color-dependent styling: RGB, HEX color codes for red/green indicators replaced with distinct grayscale tones (#333 for positive MoM, #000 for negative)</li>
@@ -144,7 +144,15 @@
             </ul>
           </div>
           <div class="patch-version">
-            <h4>v2.4.0 &mdash; Print Report Improvements</h4>
+            <h4>v2.6 &mdash; Export Format Standardization</h4>
+            <ul>
+              <li>Export button now uses the same column format as template and import: Date, Net Worth, Cash, Investments, Retirement, Real Estate</li>
+              <li>Column widths standardized across export, template, and import for consistent spreadsheet layout</li>
+              <li>Exported files now match the import format exactly, enabling seamless re-import of previously exported data</li>
+            </ul>
+          </div>
+          <div class="patch-version">
+            <h4>v2.4 &mdash; Print Report Improvements</h4>
             <ul>
               <li>Snapshot history on print report expanded from last 5 to last 12 months</li>
               <li>Net Worth Over Time chart now shows only the total net worth line (category lines removed) for cleaner print output</li>
@@ -153,14 +161,14 @@
             </ul>
           </div>
           <div class="patch-version">
-            <h4>v2.3.0 &mdash; Clear All Data</h4>
+            <h4>v2.3 &mdash; Clear All Data</h4>
             <ul>
               <li>Added Clear All button to the Snapshot History header to delete all snapshots at once</li>
               <li>Confirmation prompt required before data is removed</li>
             </ul>
           </div>
           <div class="patch-version">
-            <h4>v2.2.0 &mdash; Simplified Column Format</h4>
+            <h4>v2.2 &mdash; Simplified Column Format</h4>
             <ul>
               <li>Template and import now use condensed column headers: Date, Net Worth, Cash, Investments, Retirement, Real Estate</li>
               <li>Date column uses M/D/YYYY format (e.g. 1/1/2022) matching standard spreadsheet conventions</li>
@@ -168,7 +176,7 @@
             </ul>
           </div>
           <div class="patch-version">
-            <h4>v2.1.0 &mdash; Excel Import</h4>
+            <h4>v2.1 &mdash; Excel Import</h4>
             <ul>
               <li>Import Data button now accepts an Excel (.xlsx) file instead of raw JSON</li>
               <li>File is parsed using the same column layout as the template</li>
@@ -176,14 +184,14 @@
             </ul>
           </div>
           <div class="patch-version">
-            <h4>v2.0.0 &mdash; Allocation Chart Labels</h4>
+            <h4>v2.0 &mdash; Allocation Chart Labels</h4>
             <ul>
               <li>Allocation chart legend now shows percentage inline next to each category (e.g., "Cash (5%)") &mdash; no hover required</li>
               <li>Legend labels always reflect live allocation percentages</li>
             </ul>
           </div>
           <div class="patch-version">
-            <h4>v1.4.0 &mdash; Print &amp; PDF Report</h4>
+            <h4>v1.4 &mdash; Print &amp; PDF Report</h4>
             <ul>
               <li>Upgraded print function produces a clean 8.5&times;11 letter-portrait PDF report</li>
               <li>Report includes: NET WORTH REPORT header, 5-metric KPI grid, charts side-by-side (60/40), recent 5-snapshot history table</li>
@@ -192,7 +200,7 @@
             </ul>
           </div>
           <div class="patch-version">
-            <h4>v1.3.0 &mdash; Collapsible History &amp; Print Preview</h4>
+            <h4>v1.3 &mdash; Collapsible History &amp; Print Preview</h4>
             <ul>
               <li>Snapshot History section now has a collapse/expand toggle button</li>
               <li>Patch Notes section retains its collapse/expand toggle</li>
@@ -200,7 +208,7 @@
             </ul>
           </div>
           <div class="patch-version">
-            <h4>v1.2.0 &mdash; Excel Template &amp; MoM Indicators</h4>
+            <h4>v1.2 &mdash; Excel Template &amp; MoM Indicators</h4>
             <ul>
               <li>Download Excel (.xlsx) template with pre-formatted fields for all four categories</li>
               <li>Instructions tab included in template workbook</li>
@@ -209,7 +217,7 @@
             </ul>
           </div>
           <div class="patch-version">
-            <h4>v1.1.0 &mdash; Chart Enhancements &amp; Allocation Fix</h4>
+            <h4>v1.1 &mdash; Chart Enhancements &amp; Allocation Fix</h4>
             <ul>
               <li>Hover tooltips on all charts now show both dollar value and percentage of portfolio</li>
               <li>Fixed allocation percentage calculations &mdash; now correctly computed from latest snapshot total</li>
@@ -217,7 +225,7 @@
             </ul>
           </div>
           <div class="patch-version">
-            <h4>v1.0.0 &mdash; Initial Release</h4>
+            <h4>v1.0 &mdash; Initial Release</h4>
             <ul>
               <li>Net worth tracking across four categories: Cash Equivalents, Taxable Investments, Retirement Investments, Real Estate</li>
               <li>Add Snapshot modal for monthly data entry</li>

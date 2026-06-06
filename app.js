@@ -446,14 +446,14 @@ function exportData() {
 
   const wb   = XLSX.utils.book_new();
   const rows = [
-    ['Date (YYYY-MM)', 'Cash Equivalents', 'Taxable Investments', 'Retirement Investments', 'Real Estate', 'Total Net Worth']
+    ['Date', 'Net Worth', 'Cash', 'Investments', 'Retirement', 'Real Estate']
   ];
   snapshots.forEach(s => {
-    rows.push([s.date, s.cash || 0, s.taxable || 0, s.retirement || 0, s.realEstate || 0, s.total || 0]);
+    rows.push([s.date, s.total || 0, s.cash || 0, s.taxable || 0, s.retirement || 0, s.realEstate || 0]);
   });
 
   const ws = XLSX.utils.aoa_to_sheet(rows);
-  ws['!cols'] = [{ wch:18 }, { wch:20 }, { wch:22 }, { wch:24 }, { wch:16 }, { wch:18 }];
+  ws['!cols'] = [{ wch:12 }, { wch:14 }, { wch:12 }, { wch:14 }, { wch:14 }, { wch:14 }];
   XLSX.utils.book_append_sheet(wb, ws, 'Net Worth Data');
 
   XLSX.writeFile(wb, `networth-export-${new Date().toISOString().slice(0, 10)}.xlsx`);
