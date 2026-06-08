@@ -1,6 +1,6 @@
 # Net Worth Tracker
 
-**[Live App → https://azqato.github.io/Net-Worth-Tracker/index.html](https://azqato.github.io/Net-Worth-Tracker/index.html)**
+**[Live App → https://azqato.github.io/Net-Worth-Tracker/](https://azqato.github.io/Net-Worth-Tracker/)**
 
 A personal net worth tracker that runs entirely in your browser — no account required, no data sent anywhere. Track your wealth across four categories over time with charts, month-over-month comparisons, and Excel import/export.
 
@@ -13,11 +13,11 @@ A personal net worth tracker that runs entirely in your browser — no account r
 - **Allocation chart** — doughnut chart with live percentage labels
 - **Month-over-month (MoM)** — percentage change badges on every card
 - **Excel export** — download your data as a `.xlsx` file
-- **Excel import** — re-import data from the provided template
+- **Excel import** — load data from the provided template
 - **Print report** — clean letter-portrait PDF with charts and snapshot history
 - **100% client-side** — all data lives in your browser's localStorage
-- **Emoji favicon** — 💰 money bag icon appears in browser tabs and bookmarks
-- **Support link** — quick access to the support page via the navigation bar
+- **Landing page & guide** — step-by-step setup, import, and export tutorials
+- **Emoji favicon** — 💰 money bag icon in browser tabs and bookmarks
 
 ## Categories
 
@@ -30,7 +30,7 @@ A personal net worth tracker that runs entirely in your browser — no account r
 
 ## Usage
 
-Visit the [live app](https://azqato.github.io/Net-Worth-Tracker/index.html) and click **+ Add Snapshot** to record your first month. No setup needed.
+Visit the [landing page](https://azqato.github.io/Net-Worth-Tracker/) for a step-by-step guide, then open the [app](https://azqato.github.io/Net-Worth-Tracker/app.html) and click **Add Snapshot** to record your first month.
 
 To import historical data, click **Template** to download a pre-formatted Excel file, fill it in, then use **Import Data** to load it.
 

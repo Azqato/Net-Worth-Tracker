@@ -157,7 +157,7 @@ function exportAndDismiss() {
 function renderTotalCard(latest, prev) {
   document.getElementById('totalNetWorth').textContent = latest ? fmt(latest.total) : '$0';
   document.getElementById('totalDate').textContent =
-    latest ? `As of ${fmtDate(latest.date)}` : 'As of No data yet';
+    latest ? `As of ${fmtDate(latest.date)}` : 'No data yet';
 
   const momEl = document.getElementById('totalMoM');
   if (latest && prev) {
@@ -587,21 +587,6 @@ function downloadTemplate() {
 
 // ─── Print Report ────────────────────────────────────────────────────────────
 
-/**
- * printReport() — Monochrome-Optimized Print Function
- * Generates a letter-size Net Worth Report with full compatibility for monochrome laser printers
- * (HP LaserJet, Brother, Canon, etc.).
- * 
- * MONOCHROME ADAPTATIONS:
- * - All text, borders, and lines use pure black (#000000) for maximum printer compatibility
- * - No grayscale variations or light colors that may not print reliably
- * - ALL TEXT IS BOLD (font-weight: 700/900) for maximum visibility on monochrome printers
- * - Thicker borders (2px+) for prominent definition and crisp lines
- * - Increased font sizes and padding for improved readability
- * - Pure black rendering eliminates dithering inconsistencies across different printer models
- * - Optimized spacing and line-height for legibility on all monochrome laser devices
- * - High ink density on printed text and lines prevents fading on HP LaserJet, Brother, Canon, Xerox
- */
 function printReport() {
   const latest = snapshots.length > 0 ? snapshots[snapshots.length - 1] : null;
   const prev   = snapshots.length > 1 ? snapshots[snapshots.length - 2] : null;
@@ -620,16 +605,12 @@ function printReport() {
       const ch    = k.value - k.prev;
       const pct   = k.prev !== 0 ? (ch / k.prev) * 100 : 0;
       const sign  = ch >= 0 ? '+' : '';
-      // MONOCHROME: All indicators use pure black (#000000) and bold for reliable printer output
-      const color = '#000000';
-      changeHtml = `<div class="pr-kpi-change" style="color:${color};font-weight:700">${sign}${pct.toFixed(1)}% MoM</div>`;
+      changeHtml = `<div class="pr-kpi-change" style="color:#000000;font-weight:700">${sign}${pct.toFixed(1)}% MoM</div>`;
     }
     return `<div class="pr-kpi"><div class="pr-kpi-label" style="font-weight:700">${k.label}</div>
       <div class="pr-kpi-value" style="font-weight:900">${fmt(k.value)}</div>${changeHtml}</div>`;
   }).join('');
 
-  // Render print-specific line chart off-screen: only Net Worth total, pure black
-  // MONOCHROME: Chart uses pure black (#000000) for all lines and text
   const offscreen = document.createElement('div');
   offscreen.style.cssText = 'position:fixed;left:-9999px;top:0;visibility:hidden';
   document.body.appendChild(offscreen);
@@ -647,7 +628,6 @@ function printReport() {
         datasets: [{
           label: 'Net Worth',
           data: snapshots.map(s => s.total),
-          // MONOCHROME: Pure black line (#000000) with solid fill (no opacity) for maximum printer compatibility
           borderColor: '#000000', backgroundColor: '#f0f0f0',
           fill: true, tension: 0.3, pointRadius: 4, borderWidth: 3
         }]
@@ -656,7 +636,6 @@ function printReport() {
         responsive: false, animation: { duration: 0 },
         plugins: { legend: { display: false } },
         scales: {
-          // MONOCHROME: All axis lines, grids, text bold and black (#000000) for visibility
           x: { grid: { color: '#000000', lineWidth: 2 }, ticks: { color: '#000000', font: { size: 11, weight: 700 }, maxRotation: 45 } },
           y: { grid: { color: '#000000', lineWidth: 2 }, ticks: { color: '#000000', font: { size: 11, weight: 700 }, callback: v => fmtShort(v) } }
         }
@@ -668,7 +647,6 @@ function printReport() {
 
   document.body.removeChild(offscreen);
 
-  // MONOCHROME: No-data message uses pure black and bold for consistent, visible appearance
   const lineHtml = lineImg ? `<img src="${lineImg}" alt="Net Worth Chart">` : '<div style="padding:40px;text-align:center;color:#000000;font-size:12px;font-weight:700">No data</div>';
 
   const recent = [...snapshots].reverse().slice(0, 12);
@@ -682,9 +660,7 @@ function printReport() {
           const ch    = snap.total - p.total;
           const pct   = p.total !== 0 ? (ch / p.total) * 100 : 0;
           const sign  = ch >= 0 ? '+' : '';
-          // MONOCHROME: All text uses pure black (#000000) and bold for consistent, reliable printing
-          const color = '#000000';
-          momCell = `<span style="color:${color};font-weight:700">${sign}${pct.toFixed(2)}%</span>`;
+          momCell = `<span style="color:#000000;font-weight:700">${sign}${pct.toFixed(2)}%</span>`;
         }
         return `<tr>
           <td style="font-weight:700">${fmtDate(snap.date)}</td><td style="font-weight:700">${fmt(snap.cash)}</td>
