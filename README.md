@@ -17,6 +17,7 @@ A personal net worth tracker that runs entirely in your browser — no account r
 - **Print report** — clean letter-portrait PDF with charts and snapshot history
 - **100% client-side** — all data lives in your browser's localStorage
 - **Emoji favicon** — 💰 money bag icon appears in browser tabs and bookmarks
+- **Support link** — quick access to the support page via the navigation bar
 
 ## Categories
 

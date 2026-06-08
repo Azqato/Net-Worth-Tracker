@@ -717,3 +717,25 @@ textarea.form-input { resize: vertical; min-height: 120px; }
   .pr-history-table tr:nth-child(even) td { background: #ffffff; }
   .pr-history-table tr:nth-child(odd) td { background: #ffffff; }
 }
+
+/* ── FOOTER ── */
+.site-footer {
+  text-align: center;
+  padding: 20px 24px;
+  color: var(--text-muted);
+  font-size: 13px;
+  border-top: 1px solid var(--border);
+  margin-top: 8px;
+}
+.site-footer a {
+  color: var(--accent);
+  text-decoration: none;
+}
+.site-footer a:hover { text-decoration: underline; }
+
+/* ── SUPPORT BUTTON ── */
+.btn-support {
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+}
