@@ -611,44 +611,6 @@ function printReport() {
       <div class="pr-kpi-value" style="font-weight:900">${fmt(k.value)}</div>${changeHtml}</div>`;
   }).join('');
 
-  const offscreen = document.createElement('div');
-  offscreen.style.cssText = 'position:fixed;left:-9999px;top:0;visibility:hidden';
-  document.body.appendChild(offscreen);
-
-  let lineImg = '';
-
-  if (snapshots.length > 0) {
-    const c = document.createElement('canvas');
-    c.width = 880; c.height = 260;
-    offscreen.appendChild(c);
-    const ch = new Chart(c, {
-      type: 'line',
-      data: {
-        labels: snapshots.map(s => fmtDate(s.date)),
-        datasets: [{
-          label: 'Net Worth',
-          data: snapshots.map(s => s.total),
-          borderColor: '#000000', backgroundColor: '#f0f0f0',
-          fill: true, tension: 0.3, pointRadius: 4, borderWidth: 3
-        }]
-      },
-      options: {
-        responsive: false, animation: { duration: 0 },
-        plugins: { legend: { display: false } },
-        scales: {
-          x: { grid: { color: '#000000', lineWidth: 2 }, ticks: { color: '#000000', font: { size: 11, weight: 700 }, maxRotation: 45 } },
-          y: { grid: { color: '#000000', lineWidth: 2 }, ticks: { color: '#000000', font: { size: 11, weight: 700 }, callback: v => fmtShort(v) } }
-        }
-      }
-    });
-    lineImg = c.toDataURL();
-    ch.destroy();
-  }
-
-  document.body.removeChild(offscreen);
-
-  const lineHtml = lineImg ? `<img src="${lineImg}" alt="Net Worth Chart">` : '<div style="padding:40px;text-align:center;color:#000000;font-size:12px;font-weight:700">No data</div>';
-
   const recent = [...snapshots].reverse().slice(0, 12);
   const rowsHtml = recent.length === 0
     ? '<tr><td colspan="7" style="text-align:center;color:#000000;font-weight:700;font-size:12px">No data</td></tr>'
@@ -670,21 +632,65 @@ function printReport() {
       }).join('');
 
   const dateStr = new Date().toLocaleDateString('en-US', { year:'numeric', month:'long', day:'numeric' });
-  document.getElementById('printReport').innerHTML = `
-    <div class="pr-header">
-      <h1>Net Worth Report</h1>
-      <div class="pr-date">Generated ${dateStr}${latest ? ` &nbsp;·&nbsp; Data as of ${fmtDate(latest.date)}` : ''}</div>
-    </div>
-    <div class="pr-kpi-grid">${kpiHtml}</div>
-    <div class="pr-chart-box pr-chart-full"><h4>Net Worth Over Time</h4>${lineHtml}</div>
-    <div class="pr-history">
-      <h4>Recent Snapshot History (Last 12)</h4>
-      <table class="pr-history-table">
-        <thead><tr><th>Date</th><th>Cash</th><th>Taxable</th><th>Retirement</th><th>Real Estate</th><th>Total</th><th>MoM</th></tr></thead>
-        <tbody>${rowsHtml}</tbody>
-      </table>
-    </div>`;
-  window.print();
+
+  function buildAndPrint(lineImg) {
+    const lineHtml = lineImg ? `<img src="${lineImg}" alt="Net Worth Chart">` : '<div style="padding:40px;text-align:center;color:#000000;font-size:12px;font-weight:700">No data</div>';
+    document.getElementById('printReport').innerHTML = `
+      <div class="pr-header">
+        <h1>Net Worth Report</h1>
+        <div class="pr-date">Generated ${dateStr}${latest ? ` &nbsp;·&nbsp; Data as of ${fmtDate(latest.date)}` : ''}</div>
+      </div>
+      <div class="pr-kpi-grid">${kpiHtml}</div>
+      <div class="pr-chart-box pr-chart-full"><h4>Net Worth Over Time</h4>${lineHtml}</div>
+      <div class="pr-history">
+        <h4>Recent Snapshot History (Last 12)</h4>
+        <table class="pr-history-table">
+          <thead><tr><th>Date</th><th>Cash</th><th>Taxable</th><th>Retirement</th><th>Real Estate</th><th>Total</th><th>MoM</th></tr></thead>
+          <tbody>${rowsHtml}</tbody>
+        </table>
+      </div>`;
+    window.print();
+  }
+
+  if (snapshots.length === 0) {
+    buildAndPrint('');
+    return;
+  }
+
+  const offscreen = document.createElement('div');
+  offscreen.style.cssText = 'position:fixed;left:-9999px;top:0;visibility:hidden';
+  document.body.appendChild(offscreen);
+
+  const c = document.createElement('canvas');
+  c.width = 880; c.height = 260;
+  offscreen.appendChild(c);
+  const ch = new Chart(c, {
+    type: 'line',
+    data: {
+      labels: snapshots.map(s => fmtDate(s.date)),
+      datasets: [{
+        label: 'Net Worth',
+        data: snapshots.map(s => s.total),
+        borderColor: '#000000', backgroundColor: '#f0f0f0',
+        fill: true, tension: 0.3, pointRadius: 4, borderWidth: 3
+      }]
+    },
+    options: {
+      responsive: false,
+      animation: { duration: 0 },
+      plugins: { legend: { display: false } },
+      scales: {
+        x: { grid: { color: '#000000', lineWidth: 2 }, ticks: { color: '#000000', font: { size: 11, weight: 700 }, maxRotation: 45 } },
+        y: { grid: { color: '#000000', lineWidth: 2 }, ticks: { color: '#000000', font: { size: 11, weight: 700 }, callback: v => fmtShort(v) } }
+      }
+    }
+  });
+  requestAnimationFrame(() => {
+    const img = c.toDataURL();
+    ch.destroy();
+    document.body.removeChild(offscreen);
+    buildAndPrint(img);
+  });
 }
 
 // ─── Formatting helpers ──────────────────────────────────────────────────────
