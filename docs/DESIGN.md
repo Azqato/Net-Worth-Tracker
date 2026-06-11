@@ -146,7 +146,7 @@ All modals use `.modal-overlay` (fixed full-screen, `backdrop-filter: blur`, dar
 | ARIA | `aria-hidden="true"` on decorative SVGs in auth modal |
 | Form labels | All form inputs have associated `<label>` elements |
 
-**Known gaps**: No skip-navigation link; chart canvases have no `aria-label` or `role="img"` descriptions; color is used as the sole differentiator for MoM badges (positive green / negative red).
+**Known gaps**: No skip-navigation link; chart canvases have no `aria-label` or `role="img"` descriptions; color is used as the sole differentiator for MoM badges (positive green / negative red). See Known Technical Debt in PRD.md for the full list.
 
 ---
 

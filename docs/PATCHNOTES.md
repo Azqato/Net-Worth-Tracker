@@ -4,6 +4,15 @@ All changes listed newest first.
 
 ---
 
+## v3.8 — 2026-06-10 — Print Chart First-Click Fix
+
+### Fixed
+- Print button now correctly renders the Net Worth chart on the first click
+- Root cause: Chart.js 4.4.0 uses `requestAnimationFrame` internally even with `animation.duration: 0`, so calling `canvas.toDataURL()` synchronously after `new Chart()` captured a blank canvas on the first call
+- Fix: deferred `toDataURL()` and `window.print()` to the next RAF tick via `requestAnimationFrame`, guaranteeing the canvas is fully painted before capture
+
+---
+
 ## v3.7 — 2026-06-09 — URL Lowercase Migration
 
 ### Changed
