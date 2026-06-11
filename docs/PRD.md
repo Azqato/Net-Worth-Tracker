@@ -399,6 +399,8 @@ No Node.js. No npm. No framework. No runtime in production.
     └── PATCHNOTES.md # Full version history
 ```
 
+`docs/` was consolidated from 10 files to 3 in v3.8. The former TENETS.md, METRICS.md, ROADMAP.md, PRFAQ.md, TRD.md, SECURITY.md, and RUNBOOK.md were all folded into PRD.md under their respective sections. This keeps the documentation surface small and maintainable by a single developer — consistent with Tenet 3.
+
 ### Data Models
 
 #### Snapshot Object
